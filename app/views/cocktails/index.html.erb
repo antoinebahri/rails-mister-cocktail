@@ -3,10 +3,16 @@
   <div class="row">
     <% @cocktails.each do |cocktail| %>
     <div class="col-xs-12 col-sm-6 col-md-4">
-      <div class="card" style='background-image: url("https://loremflickr.com/320/240/cocktail>")'><%= link_to cocktail.name, cocktail_path(cocktail) %>
-      </div>
+      <% if cocktail.photo.present? %>
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+         url('<%= cl_image_path @cocktail.photo, height: 300, width: 400, crop: :fill %>')"><%= link_to cocktail.name, cocktail_path(cocktail) %>
+       </div>
+      <% else %>
+        <div class="card"><%= link_to cocktail.name, cocktail_path(cocktail) %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+    <% end %>
   <div class="col-xs-12 col-sm-6 col-md-4">
       <div class="card" style='background-image: url("https://loremflickr.com/320/240/mojito>")'><%= link_to "Add a new cocktail", new_cocktail_path %>
       </div>
